@@ -46,6 +46,25 @@ class Belge:
     vergiler_dahil: float | None = None
     odenecek: float | None = None
     para_birimi: str = "TL"
+    # e-Fatura XML'inden gelen ayrıntılar (PDF'lerde boş kalır)
+    kaynak: str = "PDF"
+    ettn: str | None = None
+    senaryo: str | None = None
+    fatura_tipi: str | None = None
+    kur: float | None = None
+    satici_vd: str | None = None
+    satici_adres: str | None = None
+    alici_adres: str | None = None
+    istisna: str | None = None
+    tevkifat_kodu: str | None = None
+    irsaliye_no: str | None = None
+    siparis_no: str | None = None
+    vade: date | None = None
+    odeme: str | None = None
+    notlar: str | None = None
+    kalem_sayisi: int | None = None
+    kalemler: list[dict] = field(default_factory=list)
+    vergiler: list[dict] = field(default_factory=list)
     ocr: bool = False
     yol: str = ""
     uyarilar: list[str] = field(default_factory=list)

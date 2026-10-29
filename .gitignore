@@ -6,3 +6,4 @@ build/
 dist/
 *.xlsx
 build-log.txt
+tests/ornekler/

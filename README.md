@@ -21,6 +21,16 @@ RAR, ZIP, 7z arşivini, klasörü ya da PDF'leri pencereye sürükleyin; belgele
 
 Bulunamayan ya da OCR ile okunan hücreler **sarı** boyanır; *Kontrol Notu* nedenini yazar (döviz faturası, tutar tutarsızlığı, KDV istisnası vb.). En alttaki toplam satırı filtreyle birlikte çalışır.
 
+## e-Fatura XML (ayrıntılı)
+
+e-Fatura / e-Arşiv Fatura XML'leri (UBL-TR 1.2.1; GİB zarfı içindekiler dahil) verildiğinde Excel'e üç sayfa yazılır:
+
+- **Faturalar:** yukarıdaki sütunlar + ETTN, senaryo, fatura tipi, para birimi ve kur, satıcı vergi dairesi, adresler, tevkifat kodu ve oranı, istisna/muafiyet kodu ve sebebi, irsaliye ve sipariş no, vade, ödeme (IBAN), kalem sayısı, notlar (iade faturasında iade edilen fatura no)
+- **Kalemler:** her satır: mal/hizmet, ürün kodları, marka/model, GTİP, miktar ve birim (adıyla), birim fiyat, iskonto/arttırım, KDV oranı ve tutarı, tevkifat kodu/oranı/tutarı, istisna, diğer vergiler
+- **Vergiler:** fatura başına her vergi ve tevkifat kırılımı: kod, ad, oran, matrah, tutar, istisna kodu ve sebebi
+
+Kod adları (vergi, tevkifat, istisna, özel matrah, ihraç kayıtlı, birim kodları) GİB'in [UBL-TR Kod Listeleri](https://ebelge.gib.gov.tr/efaturamevzuat.html) kılavuzundan (V1.43, Temmuz 2026) `tools/kodlari_uret.py` ile üretilir. Döviz faturalarında Faturalar sayfası belgedeki kurla TL'ye çevrilir; Kalemler ve Vergiler belge parasında kalır. Aynı faturanın PDF'i ve XML'i birlikte verilirse XML kullanılır.
+
 ## Tanınan belgeler
 
 - GİB e-Arşiv / e-Fatura (tevkifatlı ve döviz faturaları dahil)

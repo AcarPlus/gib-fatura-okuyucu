@@ -17,7 +17,7 @@ from .version import __version__
 
 SARI = QColor("#FFF2CC")
 SIRALA_ROLU = Qt.ItemDataRole.UserRole
-GIRDI_FILTRESI = "Desteklenen dosyalar (*.rar *.zip *.7z *.pdf);;Tüm dosyalar (*.*)"
+GIRDI_FILTRESI = "Desteklenen dosyalar (*.rar *.zip *.7z *.pdf *.xml);;Tüm dosyalar (*.*)"
 
 STIL = """
 QMainWindow, QWidget#merkez { background: #F5F6F8; }
@@ -215,7 +215,7 @@ class BirakAlani(QFrame):
         self.setAcceptDrops(True)
         self.setMinimumHeight(120)
 
-        baslik = QLabel("RAR, ZIP, klasör veya PDF'leri buraya sürükleyin")
+        baslik = QLabel("RAR, ZIP, klasör, PDF veya e-Fatura XML'lerini buraya sürükleyin")
         baslik.setObjectName("birakBaslik")
         baslik.setAlignment(Qt.AlignmentFlag.AlignCenter)
         alt = QLabel("ya da aşağıdaki düğmelerle seçin")
@@ -351,7 +351,7 @@ class MainWindow(QMainWindow):
         alt.addWidget(self.excel_btn)
         ana.addLayout(alt)
 
-        self.statusBar().showMessage("Hazır. Çift tıklayarak bir belgenin PDF'ini açabilirsiniz.")
+        self.statusBar().showMessage("Hazır. Çift tıklayarak bir belgenin dosyasını açabilirsiniz.")
         self.model.rowsInserted.connect(self._ozet_guncelle)
         self.model.modelReset.connect(self._ozet_guncelle)
         self._ozet_guncelle()
@@ -474,10 +474,10 @@ class MainWindow(QMainWindow):
         b = self.model.belgeler[self.proxy.mapToSource(index).row()]
         if b.yol:
             if not QDesktopServices.openUrl(QUrl.fromLocalFile(b.yol)):
-                self.statusBar().showMessage("PDF açılamadı.", 6000)
+                self.statusBar().showMessage("Dosya açılamadı.", 6000)
         else:
             self.statusBar().showMessage(
-                "Bu belge bir arşivden okundu; özgün PDF dosyası bulunmuyor.", 6000)
+                "Bu belge bir arşivden okundu; özgün dosya diskte bulunmuyor.", 6000)
 
     def _ozet_guncelle(self, *_) -> None:
         bel = self.model.belgeler
